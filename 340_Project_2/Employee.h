@@ -7,15 +7,12 @@ private:
 	string name, department;
 	int id, office;
 public:
-	//Default Constructor
-	Employee();
-
 	//Constructor with parameter
 	Employee(string newName, int newID, string newDepartment, int newOffice);
 
+	//Get name
+	string getName();
+
 	//Get Department
 	string getDepartment();
-
-	//Change Department
-	void setDepartment(string newDepartment);
 };

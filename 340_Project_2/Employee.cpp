@@ -2,14 +2,18 @@
 #include "Employee.h"
 using namespace std;
 
-Employee::Employee() {
+//Constructor with parameters
+Employee::Employee(string newName, int newID, string newDepartment, int newOffice) {
+	this->name = newName;
+	this->id = newID;
+	this->department = newDepartment;
+	this->office = newOffice;
+}
 
+string Employee::getName() {
+	return this->name;
 }
 
 string Employee::getDepartment() {
 	return this->department;
-}
-
-void Employee::setDepartment(string newDepartment) {
-	this->department = newDepartment;
 }

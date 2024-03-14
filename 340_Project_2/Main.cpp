@@ -5,8 +5,7 @@ using namespace std;
 int main() {
 	
 	Employee* a = new Employee();
-	a->setDepartment("Sales");
-	cout << a->getDepartment();
+	cout << a->getName();
 
 	return 0;
 }
