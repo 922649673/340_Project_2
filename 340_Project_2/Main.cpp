@@ -7,7 +7,7 @@
 using namespace std;
 
 int main() {
-	
+
 	DirectoryHandler directory;
 
 	directory.addEmployee(new Employee("Bob", 1000, "Sales", 101));

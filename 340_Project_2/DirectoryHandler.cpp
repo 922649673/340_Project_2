@@ -5,6 +5,7 @@
 #include "Employee.h"
 #include "Department.h"
 #include "Floor.h"
+#include "Office.h"
 using namespace std;
 
 void DirectoryHandler::addEmployee(Employee* newEmployee) {
@@ -26,6 +27,29 @@ void DirectoryHandler::addEmployee(Employee* newEmployee) {
 		newDepartment->addEmployee(newEmployee);
 		this->departmentsMap[newEmployee->getDepartment()] = newDepartment;
 	}
+
+	//Check if employee's floor exist in floorsMap through office number
+	int officeNum = newEmployee->getOfficeNumber();
+	int officeOnFloor = (int)officeNum / pow(10, (int)log10(officeNum));
+
+	bool dirHasFloor = false;
+	for (auto i = this->floorsMap.begin(); i != this->floorsMap.end(); i++) {
+		if (i->second->getFloorNum() == officeOnFloor) { //Compare floor # with 1st number of office #
+			dirHasFloor = true;
+		}
+	}
+
+	if (dirHasFloor == 1) { //Add office's floor to map if not existing
+		this->floorsMap.at(officeOnFloor)->addOffice(new Office(newEmployee->getOfficeNumber(), officeNum, newEmployee->getName()));
+	} else { //Create new office floor and add associating office to it
+		Floor* newFloor = new Floor(officeOnFloor);
+		newFloor->addOffice(new Office(newEmployee->getOfficeNumber(), officeOnFloor, newEmployee->getName()));
+		this->floorsMap[officeOnFloor] = newFloor;
+	}
+
+
+
+	//cout << dirHasFloor;
 }
 
 Employee* DirectoryHandler::findEmployee(int employeeID) {
