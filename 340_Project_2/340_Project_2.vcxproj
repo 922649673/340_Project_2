@@ -128,6 +128,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Department.cpp" />
+    <ClCompile Include="DirectoryHandler.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Main.cpp" />
@@ -135,6 +136,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Department.h" />
+    <ClInclude Include="DirectoryHandler.h" />
     <ClInclude Include="Employee.h" />
     <ClInclude Include="Floor.h" />
     <ClInclude Include="Office.h" />
