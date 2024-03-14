@@ -3,10 +3,16 @@
 #include "Floor.h"
 #include "Office.h"
 #include "Department.h"
+#include "DirectoryHandler.h"
 using namespace std;
 
 int main() {
 	
+	DirectoryHandler directory;
+
+	directory.addEmployee(new Employee("Bob", 1000, "Sales", 101));
+
+	/*
 	Department CS("Computer Science");
 
 	Employee* billy = new Employee("Billy", 1000, "Computer Science", 101);
@@ -18,7 +24,6 @@ int main() {
 		cout << CS.getEmployeeList()[i]->getName() << endl;
 	}
 
-	/*
 	int operationID = 0;
 
 	do {

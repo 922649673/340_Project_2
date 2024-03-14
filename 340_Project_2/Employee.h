@@ -13,6 +13,12 @@ public:
 	//Get name
 	string getName();
 
+	//get ID
+	int getID();
+
 	//Get Department
 	string getDepartment();
+
+	//Get office number
+	int getOfficeNumber();
 };

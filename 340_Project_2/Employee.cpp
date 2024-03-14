@@ -15,6 +15,14 @@ string Employee::getName() {
 	return this->name;
 }
 
+int Employee::getID() {
+	return this->id;
+}
+
 string Employee::getDepartment() {
 	return this->department;
+}
+
+int Employee::getOfficeNumber() {
+	return this->office;
 }
