@@ -4,10 +4,8 @@ using namespace std;
 
 class Employee {
 private:
-	string name;
-	int id;
-	string department;
-	int office;
+	string name, department;
+	int id, office;
 public:
 	//Default Constructor
 	Employee();

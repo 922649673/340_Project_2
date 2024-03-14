@@ -1,8 +1,12 @@
 #include<iostream>
+#include "Employee.h"
 using namespace std;
 
 int main() {
-	cout << "Hi" << endl;
-	cout << "PC Transfer test";
+	
+	Employee* a = new Employee();
+	a->setDepartment("Sales");
+	cout << a->getDepartment();
+
 	return 0;
 }

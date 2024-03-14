@@ -7,9 +7,9 @@ Employee::Employee() {
 }
 
 string Employee::getDepartment() {
-	return department;
+	return this->department;
 }
 
 void Employee::setDepartment(string newDepartment) {
-	department = newDepartment;
+	this->department = newDepartment;
 }
