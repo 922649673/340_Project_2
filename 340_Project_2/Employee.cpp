@@ -6,5 +6,10 @@ Employee::Employee() {
 
 }
 
+string Employee::getDepartment() {
+	return department;
+}
 
-//New Comment from pc
+void Employee::setDepartment(string newDepartment) {
+	department = newDepartment;
+}

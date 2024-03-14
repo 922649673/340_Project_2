@@ -15,6 +15,9 @@ public:
 	//Constructor with parameter
 	Employee(string newName, int newID, string newDepartment, int newOffice);
 
+	//Get Department
+	string getDepartment();
+
 	//Change Department
 	void setDepartment(string newDepartment);
 };
