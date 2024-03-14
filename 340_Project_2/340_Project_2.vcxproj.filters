@@ -27,6 +27,9 @@
     <ClCompile Include="Floor.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Department.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Employee.h">

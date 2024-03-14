@@ -1,15 +1,21 @@
 #include<iostream>
 #include "Employee.h"
 #include "Floor.h"
+#include "Office.h"
+#include "Department.h"
 using namespace std;
 
 int main() {
-
-	Floor firstFloor = Floor(1);
-	firstFloor.getOffices
 	
-	for (int i = 0; i < firstFloor.getOffices().size(); i++) {
-		cout << firstFloor.getOffices()[i];
+	Department CS("Computer Science");
+
+	Employee* billy = new Employee("Billy", 1000, "Computer Science", 101);
+	CS.addEmployee(billy);
+	Employee* bobby = new Employee("Bobby", 1001, "Computer Science", 102);
+	CS.addEmployee(bobby);
+
+	for (int i = 0; i < CS.getEmployeeList().size(); i++) {
+		cout << CS.getEmployeeList()[i]->getName() << endl;
 	}
 
 	/*

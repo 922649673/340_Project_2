@@ -7,7 +7,7 @@ using namespace std;
 class Floor {
 private:
 	int floorNum;
-	vector<Office*> offices;
+	vector<Office*> officeList;
 public:
 	//Default constructor with parameter
 	Floor(int newFloorNum);
@@ -16,5 +16,8 @@ public:
 	int getFloorNum();
 
 	//Get office list on floor
-	vector<Office*>& getOffices();
+	vector<Office*>& getOfficeList();
+
+	//add office to officeList vector
+	void addOffice(Office* newOffice);
 };

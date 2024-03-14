@@ -127,6 +127,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Department.cpp" />
     <ClCompile Include="Employee.cpp" />
     <ClCompile Include="Floor.cpp" />
     <ClCompile Include="Main.cpp" />
