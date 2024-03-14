@@ -4,9 +4,18 @@ using namespace std;
 
 class Office {
 private:
-	int officeNum;
-	int floor;
+	int officeNum, floorNum;
 	string employeeName;
 public:
+	//Constructor with parameter
+	Office(int newOfficeNum, int newFloorNum, string newEmployeeName);
 
+	//Get office number
+	int getOfficeNum();
+
+	//Get floor number
+	int getFloorNum();
+
+	//Get employee name
+	string getEmployeeName();
 };

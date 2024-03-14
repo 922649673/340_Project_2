@@ -10,6 +10,7 @@ Employee::Employee(string newName, int newID, string newDepartment, int newOffic
 	this->office = newOffice;
 }
 
+//Accessors
 string Employee::getName() {
 	return this->name;
 }
