@@ -46,14 +46,14 @@ void DirectoryHandler::addEmployee(Employee* newEmployee) {
 		newFloor->addOffice(new Office(newEmployee->getOfficeNumber(), officeOnFloor, newEmployee->getName()));
 		this->floorsMap[officeOnFloor] = newFloor;
 	}
-
-
-
-	//cout << dirHasFloor;
 }
 
-Employee* DirectoryHandler::findEmployee(int employeeID) {
-	return (employeesMap.find(employeeID) != employeesMap.end()) ? employeesMap.at(employeeID) : nullptr;
+void DirectoryHandler::findEmployee(int employeeID) {
+	if (employeesMap.find(employeeID) != this->employeesMap.end()) {
+		cout << employeesMap.at(employeeID)->getName() << ", #" << employeesMap.at(employeeID)->getID() << ", works in the " << employeesMap.at(employeeID)->getDepartment() << " department in office " << employeesMap.at(employeeID)->getOfficeNumber() << "." << endl;
+	} else {
+		cout << "Employee not found." << endl;
+	}
 }
 
 void DirectoryHandler::listEmployeesInDept(string departmentName)

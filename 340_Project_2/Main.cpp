@@ -10,61 +10,67 @@ int main() {
 
 	DirectoryHandler directory;
 
+	/*
 	directory.addEmployee(new Employee("Bob", 1000, "Sales", 101));
 	directory.addEmployee(new Employee("Billy", 1001, "Sales", 102));
 	directory.addEmployee(new Employee("Jane", 1002, "Sales", 103));
 
 	directory.listEmployeesInDept("Sales");
-	directory.findEmployee(1001);
-
-	/* Loop through the vector
-	for (Employee* employeePtr : employeesInDept) {
-		
-		cout << "Employee Name: " << employeePtr->getName() << endl;
-		cout << "Employee ID: " << employeePtr->getID() << endl;
-	}*/
-
-	/*
-	Department CS("Computer Science");
-
-	Employee* billy = new Employee("Billy", 1000, "Computer Science", 101);
-	CS.addEmployee(billy);
-	Employee* bobby = new Employee("Bobby", 1001, "Computer Science", 102);
-	CS.addEmployee(bobby);
-
-	for (int i = 0; i < CS.getEmployeeList().size(); i++) {
-		cout << CS.getEmployeeList()[i]->getName() << endl;
-	}
+	directory.findEmployee(1001);*/
 
 	int operationID = 0;
 
 	do {
 		cout << endl;
-		cout << "Case 1: Add a new Employee record" << endl;
-		cout << "Case 2: Look up an employee by ID Number" << endl;
-		cout << "Case 3: List all employees in a given department" << endl;
-		cout << "Case 4: List all employees on a given floor" << endl;
-		cout << "Case 5: End" << endl;
-		cout << "Input what type of case you are using: " << endl;
+		cout << "Choose an option:" << endl;
+		cout << "1) Add a new Employee record" << endl;
+		cout << "2) Look up an employee by ID Number" << endl;
+		cout << "3) List all employees in a given department" << endl;
+		cout << "4) List all employees on a given floor" << endl;
+		cout << "Any # that is not 1-4 to end program\n" << endl;
 		cin >> operationID;
 
 		switch (operationID) {
-		case 1:
-			cout << "Output of case 1" << endl;
+		case 1: {
+			string employeeName;
+			int employeeID;
+			string departmentName;
+			int officeNum;
+			cout << "\nEnter employee name: ";
+			getline(cin >> ws, employeeName);
+			cout << "Enter employee ID number: ";
+			cin >> employeeID;
+			cout << "Enter department name: ";
+			getline(cin >> ws, departmentName);
+			cout << "Enter office number: ";
+			cin >> officeNum;
+			cout << endl;
+			
+			directory.addEmployee(new Employee(employeeName, employeeID, departmentName, officeNum));
+			cout << "Added: " << employeeName << ", #" << employeeID << ", works in the " << departmentName << " department in office " << officeNum << ".\n" << endl;
 			break;
-		case 2:
-			cout << "Output of case 2" << endl;
+		}
+		case 2: {
+			int employeeID;
+			cout << "\nEnter ID number: ";
+			cin >> employeeID;
+			cout << endl;
+
+			directory.findEmployee(employeeID);
 			break;
-		case 3:
+		}
+		case 3: {
 			cout << "Output of case 3" << endl;
 			break;
-		case 4:
+		}
+		case 4: {
 			cout << "Output of case 4" << endl;
 			break;
+		}
 		default:
-			cout << "Please input an valid operation." << endl;
+			break;
 		}
 	} while (operationID > 0 && operationID < 5);
-	*/
+	
 	return 0;
 }

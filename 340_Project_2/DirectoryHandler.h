@@ -17,7 +17,7 @@ public:
 	void addEmployee(Employee* newEmployee);
 
 	//Find a employee by ID number
-	Employee* findEmployee(int employeeID);
+	void findEmployee(int employeeID);
 
 	//List all employees in a given department
 	void listEmployeesInDept(string departmentName);
