@@ -20,7 +20,7 @@ public:
 	Employee* findEmployee(int employeeID);
 
 	//List all employees in a given department
-	vector<Employee*>& listEmployeesInDept(string departmentName);
+	void listEmployeesInDept(string departmentName);
 
 	//List all employees on a given floor
 	vector<Employee*>& listEmployeesOnFloor(int floorNum);

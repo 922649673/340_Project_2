@@ -11,6 +11,18 @@ int main() {
 	DirectoryHandler directory;
 
 	directory.addEmployee(new Employee("Bob", 1000, "Sales", 101));
+	directory.addEmployee(new Employee("Billy", 1001, "Sales", 102));
+	directory.addEmployee(new Employee("Jane", 1002, "Sales", 103));
+
+	directory.listEmployeesInDept("Sales");
+	directory.findEmployee(1001);
+
+	/* Loop through the vector
+	for (Employee* employeePtr : employeesInDept) {
+		
+		cout << "Employee Name: " << employeePtr->getName() << endl;
+		cout << "Employee ID: " << employeePtr->getID() << endl;
+	}*/
 
 	/*
 	Department CS("Computer Science");
