@@ -56,8 +56,7 @@ void DirectoryHandler::findEmployee(int employeeID) {
 	}
 }
 
-void DirectoryHandler::listEmployeesInDept(string departmentName)
-{
+void DirectoryHandler::listEmployeesInDept(string departmentName) {
 	vector<Employee*> deptEmployeeList;
 	auto i = this->departmentsMap.find(departmentName);
 	if (i != departmentsMap.end()) {
@@ -65,6 +64,29 @@ void DirectoryHandler::listEmployeesInDept(string departmentName)
 	}
 
 	for (auto employee : deptEmployeeList) {
-		cout << employee->getName() << endl;
+		cout << employee->getName() << ", #" << employee->getID() << endl;
+	}
+}
+
+void DirectoryHandler::listEmployeesOnFloor(int floorNum) {
+	vector<Office*> floorOfficeList;
+	auto i = this->floorsMap.find(floorNum);
+	if (i != floorsMap.end()) {
+		floorOfficeList = i->second->getOfficeList();
+	} else {
+		cout << "\nNo employees work on Floor " << floorNum << endl;
+		return;
+	}
+
+	cout << "The following employees work on Floor " << floorNum << ":" << endl;
+	for (auto office : floorOfficeList) {
+		
+		string employeeName = office->getEmployeeName();
+		
+		for (auto name: employeesMap) {
+			if (name.second->getName() == employeeName) {
+				cout << employeeName << ", #" << name.first << endl;
+			}
+		}
 	}
 }

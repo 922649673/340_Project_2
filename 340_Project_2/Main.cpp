@@ -60,11 +60,20 @@ int main() {
 			break;
 		}
 		case 3: {
-			cout << "Output of case 3" << endl;
+			string departmentName;
+			cout << "\nEnter department name: ";
+			getline(cin >> ws, departmentName);
+			cout << "\nThe following employees work in the " << departmentName << " department:" << endl;
+
+			directory.listEmployeesInDept(departmentName);
 			break;
 		}
 		case 4: {
-			cout << "Output of case 4" << endl;
+			int floorNum;
+			cout << "\nEnter floor number: ";
+			cin >> floorNum;
+
+			directory.listEmployeesOnFloor(floorNum);
 			break;
 		}
 		default:

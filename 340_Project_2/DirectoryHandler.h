@@ -23,5 +23,5 @@ public:
 	void listEmployeesInDept(string departmentName);
 
 	//List all employees on a given floor
-	vector<Employee*>& listEmployeesOnFloor(int floorNum);
+	void listEmployeesOnFloor(int floorNum);
 };
