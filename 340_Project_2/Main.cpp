@@ -1,8 +1,18 @@
 #include<iostream>
 #include "Employee.h"
+#include "Floor.h"
 using namespace std;
 
 int main() {
+
+	Floor firstFloor = Floor(1);
+	firstFloor.getOffices
+	
+	for (int i = 0; i < firstFloor.getOffices().size(); i++) {
+		cout << firstFloor.getOffices()[i];
+	}
+
+	/*
 	int operationID = 0;
 
 	do {
@@ -32,6 +42,6 @@ int main() {
 			cout << "Please input an valid operation." << endl;
 		}
 	} while (operationID > 0 && operationID < 5);
-
+	*/
 	return 0;
 }

@@ -7,5 +7,5 @@ class Department {
 private:
 	string departmentName, employeeName;
 public:
-	std::vector<string> departmentVector {employeeName*};
+	//vector<string> departmentVector {employeeName*};
 };
