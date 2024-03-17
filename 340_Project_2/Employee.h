@@ -8,7 +8,7 @@ private:
 	int id, office;
 public:
 	//Constructor with parameter
-	Employee(string newName, int newID, string newDepartment, int newOffice);
+	Employee(string, int, string, int);
 
 	//Get name
 	string getName();

@@ -1,6 +1,6 @@
 #pragma once
 #include<iostream>
-#include<map>
+#include<vector>
 #include<string>
 #include "Employee.h"
 #include "Department.h"
@@ -9,19 +9,19 @@ using namespace std;
 
 class DirectoryHandler {
 private:
-	map<int, Employee*> employeesMap;
-	map<string, Department*> departmentsMap;
-	map<int, Floor*> floorsMap;
+	vector<Employee*> employeesVector;
+	vector<Department*> departmentsVector;
+	vector<Floor*> floorsVector;
 public:
 	//Add a new Employee record
-	void addEmployee(Employee* newEmployee);
+	void addEmployee(Employee*);
 
 	//Find a employee by ID number
-	void findEmployee(int employeeID);
+	void findEmployee(int);
 
 	//List all employees in a given department
-	void listEmployeesInDept(string departmentName);
+	void listEmployeesInDept(string);
 
 	//List all employees on a given floor
-	void listEmployeesOnFloor(int floorNum);
+	void listEmployeesOnFloor(int);
 };

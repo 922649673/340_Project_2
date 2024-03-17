@@ -1,6 +1,7 @@
 #include<iostream>
 #include "DirectoryHandler.h"
-#include<map>
+#include<vector>
+#include <cmath>
 #include<string>
 #include "Employee.h"
 #include "Department.h"
@@ -9,83 +10,117 @@
 using namespace std;
 
 void DirectoryHandler::addEmployee(Employee* newEmployee) {
-	//Add new employee to employeeMap
-	this->employeesMap[newEmployee->getID()] = newEmployee;
-	
-	//Check if employee's department exist in departmentMap
-	bool dirHasDept = false;
-	for (auto i = this->departmentsMap.begin(); i != this->departmentsMap.end(); i++) {
-		if (i->second->getDepartmentName() == newEmployee->getDepartment()) {
-			dirHasDept = true;
+	int officeNum = newEmployee->getOfficeNumber();
+
+	//Back-up constraint checks. Constraint: 9 floors where each floor has a max # of 99 offices (omits perfect hundreds to achieve this) and 1-999 range.
+	if (officeNum > 999 || officeNum < 1 || officeNum % 100 == 0) {
+		cout << "ERROR: Office number out of bound (1-999 with no perfect hundreds i.e. 500 or 600)." << endl;
+		return;
+	}
+
+	//Handle duplicate employee case
+	for (int i = 0; i < employeesVector.size(); i++) {
+		if (employeesVector[i]->getName() == newEmployee->getName()) {
+			cout << "ERROR: Person already exist in record." << endl;
+			return;
 		}
 	}
 
-	if (dirHasDept == 1) { //Add employee to dept
-		this->departmentsMap.at(newEmployee->getDepartment())->addEmployee(newEmployee);
-	} else { //Create new department and add employee to dept
+	//Add new employee to employeeVector
+	this->employeesVector.push_back(newEmployee);
+	
+	//Check if employee's department exist in departmentVector
+	bool dirHasDept = false;
+	for (int i = 0; i < departmentsVector.size(); i++) {
+		if (departmentsVector[i]->getDepartmentName() == newEmployee->getDepartment()) {
+			dirHasDept = true;
+			departmentsVector[i]->addEmployee(newEmployee); //Add employee to department if deparrtment object exist
+			break;
+		}
+	}
+
+	//Create a new department object if it doesn't already exist and add employee to it
+	if (!dirHasDept) {
 		Department* newDepartment = new Department(newEmployee->getDepartment());
 		newDepartment->addEmployee(newEmployee);
-		this->departmentsMap[newEmployee->getDepartment()] = newDepartment;
+		departmentsVector.push_back(newDepartment);
 	}
 
-	//Check if employee's floor exist in floorsMap through office number
-	int officeNum = newEmployee->getOfficeNumber();
-	int officeOnFloor = (int)officeNum / pow(10, (int)log10(officeNum));
+	//Check if employee's floor exist in floorsVector through office number
+	int officeOnFloor = officeNum / (int)pow(10, (int)log10(officeNum)); //get 1st digit of office # to represent floor # as per constraint
 
 	bool dirHasFloor = false;
-	for (auto i = this->floorsMap.begin(); i != this->floorsMap.end(); i++) {
-		if (i->second->getFloorNum() == officeOnFloor) { //Compare floor # with 1st number of office #
+	for (int i = 0; i < this->floorsVector.size(); i++) {
+		if (floorsVector[i]->getFloorNum() == officeOnFloor) { //Compare floor # with 1st number of office #
 			dirHasFloor = true;
+			floorsVector[i]->addOffice(new Office(newEmployee->getOfficeNumber(), officeNum, newEmployee->getName())); //Add office to floor if floor object exist
 		}
 	}
 
-	if (dirHasFloor == 1) { //Add office's floor to map if not existing
-		this->floorsMap.at(officeOnFloor)->addOffice(new Office(newEmployee->getOfficeNumber(), officeNum, newEmployee->getName()));
-	} else { //Create new office floor and add associating office to it
+	//Create a new floor object if it doesn't already exist and add office object to it
+	if (!dirHasFloor) {
 		Floor* newFloor = new Floor(officeOnFloor);
 		newFloor->addOffice(new Office(newEmployee->getOfficeNumber(), officeOnFloor, newEmployee->getName()));
-		this->floorsMap[officeOnFloor] = newFloor;
+		floorsVector.push_back(newFloor);
 	}
+
+	cout << "Added: " << newEmployee->getName() << ", #" << newEmployee->getID() << ", works in the " << newEmployee->getDepartment() << " department in office " << newEmployee->getOfficeNumber() << "." << endl;
 }
 
 void DirectoryHandler::findEmployee(int employeeID) {
-	if (employeesMap.find(employeeID) != this->employeesMap.end()) {
-		cout << employeesMap.at(employeeID)->getName() << ", #" << employeesMap.at(employeeID)->getID() << ", works in the " << employeesMap.at(employeeID)->getDepartment() << " department in office " << employeesMap.at(employeeID)->getOfficeNumber() << "." << endl;
-	} else {
-		cout << "Employee not found." << endl;
+	for (int i = 0; i < employeesVector.size(); i++) {
+		if (employeesVector[i]->getID() == employeeID) {
+			cout << employeesVector[i]->getName() << ", #" << employeesVector[i]->getID() << ", works in the " << employeesVector[i]->getDepartment() << " department in office " << employeesVector[i]->getOfficeNumber() << "." << endl;
+			return;
+		}
 	}
+	cout << "Employee not found." << endl;
 }
 
 void DirectoryHandler::listEmployeesInDept(string departmentName) {
+	//Create a temp Vector
 	vector<Employee*> deptEmployeeList;
-	auto i = this->departmentsMap.find(departmentName);
-	if (i != departmentsMap.end()) {
-		deptEmployeeList = i->second->getEmployeeList();
+
+	//Locate department in vector and store its employee list in temp vector
+	for (int i = 0; i < departmentsVector.size(); i++) {
+		if (departmentsVector[i]->getDepartmentName() == departmentName) {
+			deptEmployeeList = departmentsVector[i]->getEmployeeList();
+			break;
+		}
 	}
 
-	for (auto employee : deptEmployeeList) {
+	//List employees in department
+	for (Employee* employee : deptEmployeeList) {
 		cout << employee->getName() << ", #" << employee->getID() << endl;
 	}
 }
 
 void DirectoryHandler::listEmployeesOnFloor(int floorNum) {
+	//Create a temp Vector
 	vector<Office*> floorOfficeList;
-	auto i = this->floorsMap.find(floorNum);
-	if (i != floorsMap.end()) {
-		floorOfficeList = i->second->getOfficeList();
-	} else {
-		cout << "\nNo employees work on Floor " << floorNum << endl;
-		return;
+	
+	//Find inputted floor # in vector and store its office list in temp vector
+	bool foundFloor = false;
+	for (int i = 0; i < this->floorsVector.size(); i++) {
+		if (floorsVector[i]->getFloorNum() == floorNum) {
+			foundFloor = 1;
+			floorOfficeList = floorsVector[i]->getOfficeList();
+			break;
+		}
 	}
+	
+	//Print employees working on floorNum if floor is found
+	if (!foundFloor) {
+		cout << "\nNo employees work on Floor " << floorNum << endl;
+	} else {
+		cout << "The following employees work on Floor " << floorNum << ":" << endl;
 
-	cout << "The following employees work on Floor " << floorNum << ":" << endl;
-	for (auto office : floorOfficeList) {
-		
-		string employeeName = office->getEmployeeName();
-		
-		for (auto name: employeesMap) {
-			if (name.second->getName() == employeeName) {
-				cout << employeeName << ", #" << name.first << endl;
+		//Find employees on floor O(n^2)
+		for (int i = 0; i < floorOfficeList.size(); i++) {
+			for (int j = 0; j < employeesVector.size(); j++) {
+				if (floorOfficeList[i]->getEmployeeName() == employeesVector[j]->getName()) {
+					cout << employeesVector[j]->getName() << ", #" << employeesVector[j]->getID() << endl;
+				}
 			}
 		}
 	}

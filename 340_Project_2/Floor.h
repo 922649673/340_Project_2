@@ -10,7 +10,7 @@ private:
 	vector<Office*> officeList;
 public:
 	//Default constructor with parameter
-	Floor(int newFloorNum);
+	Floor(int);
 
 	//Get floor number
 	int getFloorNum();
@@ -19,5 +19,5 @@ public:
 	vector<Office*>& getOfficeList();
 
 	//add office to officeList vector
-	void addOffice(Office* newOffice);
+	void addOffice(Office*);
 };

@@ -10,7 +10,7 @@ private:
 	vector<Employee*> employeeList;
 public:
 	//Default constructor with parameter
-	Department(string newDepartmentName);
+	Department(string);
 
 	//Get department name
 	string getDepartmentName();
@@ -19,5 +19,5 @@ public:
 	vector<Employee*>& getEmployeeList();
 
 	//add employee to officeList vector
-	void addEmployee(Employee* newEmployee);
+	void addEmployee(Employee*);
 };

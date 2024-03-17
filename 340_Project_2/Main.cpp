@@ -7,16 +7,7 @@
 using namespace std;
 
 int main() {
-
 	DirectoryHandler directory;
-
-	/*
-	directory.addEmployee(new Employee("Bob", 1000, "Sales", 101));
-	directory.addEmployee(new Employee("Billy", 1001, "Sales", 102));
-	directory.addEmployee(new Employee("Jane", 1002, "Sales", 103));
-
-	directory.listEmployeesInDept("Sales");
-	directory.findEmployee(1001);*/
 
 	int operationID = 0;
 
@@ -40,14 +31,35 @@ int main() {
 			getline(cin >> ws, employeeName);
 			cout << "Enter employee ID number: ";
 			cin >> employeeID;
+
+			if (!cin) {
+				cout << "ERROR: Please input an integer type employee ID." << endl;
+				cin.clear(); //Clear error flag
+				cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Discard invalid input
+				break;
+			}
+
 			cout << "Enter department name: ";
 			getline(cin >> ws, departmentName);
 			cout << "Enter office number: ";
 			cin >> officeNum;
+
+			if (!cin) {
+				cout << "ERROR: Please input an integer type office number." << endl;
+				cin.clear(); //Clear error flag
+				cin.ignore(numeric_limits<streamsize>::max(), '\n'); //Discard invalid input
+				break;
+			}
+
+			//Constraint: 9 floors where each floor has a max # of 99 offices (omits perfect hundreds to achieve this) and 1-999 range. (This check blocks unnecessary object creation)
+			if (officeNum > 999 || officeNum < 1 || officeNum % 100 == 0) {
+				cout << "ERROR: Office number out of bound (1-999 with no perfect hundreds i.e. 500 or 600)." << endl;
+				break;
+			}
+
 			cout << endl;
-			
+
 			directory.addEmployee(new Employee(employeeName, employeeID, departmentName, officeNum));
-			cout << "Added: " << employeeName << ", #" << employeeID << ", works in the " << departmentName << " department in office " << officeNum << ".\n" << endl;
 			break;
 		}
 		case 2: {
@@ -80,6 +92,6 @@ int main() {
 			break;
 		}
 	} while (operationID > 0 && operationID < 5);
-	
+
 	return 0;
 }
